@@ -2,7 +2,7 @@ services:
   valuecell:
     build:
       context: ..              # Points to repo root (assuming compose is in a subfolder)
-      dockerfile: Dockerfile  # Fixed capitalization (lower case 'f')
+      dockerfile: docker/Dockerfile  # Fixed capitalization (lower case 'f')
     volumes:
       - /volume1/docker/valuecell:/app/data
     ports:
