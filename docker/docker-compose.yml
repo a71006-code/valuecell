@@ -7,3 +7,6 @@ services:
       - /volume1/docker/valuecell:/app/data
     ports:
       - "8080:8000"            # Fixed Port: Host 8080 -> Container 8000
+    # ADD THESE TWO LINES:
+    tty: true        # Allocates a pseudo-TTY (pretends a terminal is attached)
+    stdin_open: true # Keeps standard input open (prevents EOF signal)
