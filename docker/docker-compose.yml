@@ -1,0 +1,7 @@
+services:
+  valuecell:
+    build:
+      context: ..
+      dockerfile: docker/DockerFile
+    ports:
+      - "8080:8080"
