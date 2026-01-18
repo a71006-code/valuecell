@@ -3,5 +3,7 @@ services:
     build:
       context: ..
       dockerfile: docker/DockerFile
+    volumes:
+      - valuecell-data:/app/data
     ports:
       - "8080:8080"
