@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Pre-cache the application dependencies.
 RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=python\uv.lock,target=uv.lock \
+    --mount=type=bind,source=python/uv.lock,target=uv.lock \
     --mount=type=bind,source=python/pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-install-project
 
