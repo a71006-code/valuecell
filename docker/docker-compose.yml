@@ -1,12 +1,33 @@
 services:
   valuecell:
     build:
-      context: ..              # Points to repo root (assuming compose is in a subfolder)
+      context: .              # Points to repo root (assuming compose is in a subfolder)
       dockerfile: docker/DockerFile  # Fixed capitalization (lower case 'f')
+    container_name: valuecell-backend
     volumes:
       - /volume1/docker/valuecell:/app/data
+      - /volume1/docker/valuecell/configs:/app/configs
     ports:
       - "8080:8000"            # Fixed Port: Host 8080 -> Container 8000
     # ADD THESE TWO LINES:
     tty: true        # Allocates a pseudo-TTY (pretends a terminal is attached)
     stdin_open: true # Keeps standard input open (prevents EOF signal)
+    environment:
+      - API_HOST=0.0.0.0
+      - SEC_EMAIL=your.actual.email@gmail.com  # <--- REQUIRED
+      - GOOGLE_API_KEY=AIzaSy...                 # <--- REQUIRED (Gemini Key)\
+# -------------------------------------------------------
+  # 2. The Face (Frontend)
+  # -------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+    container_name: valuecell-frontend
+    ports:
+      - "3000:1420"  # Access UI at http://<NAS_IP>:3000
+    environment:
+      # Points the UI to your Backend API
+      - VITE_API_BASE_URL=http://192.168.1.XX:8080/api/v1  # <--- UPDATE IP
+    depends_on:
+      - valuecell
