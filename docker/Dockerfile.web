@@ -1,0 +1,20 @@
+# docker/Dockerfile.web
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY frontend/package.json frontend/package-lock.json* ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the frontend code
+COPY frontend/ .
+
+# Expose the port used by Vite/Tauri (default is often 1420 or 5173)
+EXPOSE 1420
+
+# Start the development server
+# We use --host to ensure it listens outside the container
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "1420"]
