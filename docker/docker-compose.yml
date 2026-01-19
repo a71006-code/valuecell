@@ -4,6 +4,8 @@ services:
       context: ..
       dockerfile: docker/DockerFile  # Fixed capitalization (lower case 'f')
     container_name: valuecell-backend
+    ty: true          # Allocates a pseudo-TTY
+    stdin_open: true   # Keeps stdin open even if not attached    
     volumes:
       - /volume1/docker/valuecell:/app/data
       - /volume1/docker/valuecell/configs:/app/configs
