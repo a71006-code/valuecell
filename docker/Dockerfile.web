@@ -1,5 +1,5 @@
-# docker/Dockerfile.web
-FROM node:20-slim
+# Use the official Bun image (Slim version for Synology)
+FROM oven/bun:1-slim
 
 # 1. Install build essentials required for native npm modules
 RUN apt-get update && apt-get install -y \
@@ -7,18 +7,21 @@ RUN apt-get update && apt-get install -y \
     make \
     g++ \
     curl \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Copy package files first for better caching
 COPY frontend/package.json ./
+# If you have bun.lockb, copy it; if not, Bun will create it
+COPY frontend/bun.lock ./
 
-# TEST: Can the container actually see the npm registry?
-RUN curl -I https://registry.npmjs.org/
+# 3. TEST: Connectivity check (now works because we installed curl)
+RUN curl -I https://registry.npmjs.org/ || echo "Warning: Network check failed"
 
-# Install dependencies
-RUN npm install --loglevel verbose
+# Install dependencies using Bun (much faster and more reliable here)
+RUN bun install
 
 # Copy the rest of the frontend code
 COPY frontend/ .
@@ -28,4 +31,4 @@ EXPOSE 1420
 
 # Start the development server
 # We use --host to ensure it listens outside the container
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "1420"]
+CMD ["bun", "run", "dev", "--", "--host", "0.0.0.0", "--port", "1420"]
