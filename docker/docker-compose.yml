@@ -13,14 +13,24 @@ services:
     tty: true        # Allocates a pseudo-TTY (pretends a terminal is attached)
     stdin_open: true # Keeps standard input open (prevents EOF signal)
     environment:
-      - ENV=local_dev  # This prevents the stdin-control shutdown loop
-      - API_HOST=${API_HOST}
-      - SEC_EMAIL=${SEC_EMAIL}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - SEC_EMAIL=${SEC_EMAIL}
-      - DATA_DIR=/app/data
+      #- ENV=local_dev  # This prevents the stdin-control shutdown loop
+      - ENV=production
       - CONFIG_DIR=/app/configs
+      - CONFIG_FILE=config.yaml
       - VALUECELL_DATA_DIR=/app/data
+      
+      - API_HOST=${API_HOST}
+      - SEC_EMAIL=${SEC_EMAIL}      
+      - AUTO_DETECT_PROVIDER=false
+      - DATA_DIR=/app/data
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+           
+      # --- App Defaults ---
+      - APP_ENVIRONMENT=production
+      - API_DEBUG=true
+      - TIMEZONE=America/New_York
+      
 # -------------------------------------------------------
   # 2. The Face (Frontend)
   # -------------------------------------------------------
