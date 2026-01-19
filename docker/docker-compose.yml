@@ -1,7 +1,7 @@
 services:
   valuecell:
     build:
-      context: .
+      context: ..
       dockerfile: docker/DockerFile  # Fixed capitalization (lower case 'f')
     container_name: valuecell-backend
     volumes:
@@ -21,7 +21,7 @@ services:
   # -------------------------------------------------------
   web:
     build:
-      context: .
+      context: ..
       dockerfile: docker/Dockerfile.web
     container_name: valuecell-frontend
     ports:
