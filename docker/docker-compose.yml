@@ -18,6 +18,8 @@ services:
       - SEC_EMAIL=${SEC_EMAIL}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - SEC_EMAIL=${SEC_EMAIL}
+      - DATA_DIR=/app/data
+      - CONFIG_DIR=/app/configs
 # -------------------------------------------------------
   # 2. The Face (Frontend)
   # -------------------------------------------------------
