@@ -3,9 +3,7 @@ services:
     build:
       context: ..
       dockerfile: docker/DockerFile  # Fixed capitalization (lower case 'f')
-    container_name: valuecell-backend
-    ty: true          # Allocates a pseudo-TTY
-    stdin_open: true   # Keeps stdin open even if not attached    
+    container_name: valuecell-backend     
     volumes:
       - /volume1/docker/valuecell:/app/data
       - /volume1/docker/valuecell/configs:/app/configs
@@ -15,9 +13,11 @@ services:
     tty: true        # Allocates a pseudo-TTY (pretends a terminal is attached)
     stdin_open: true # Keeps standard input open (prevents EOF signal)
     environment:
+      - ENV=local_dev  # This prevents the stdin-control shutdown loop
       - API_HOST=${API_HOST}
       - SEC_EMAIL=${SEC_EMAIL}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - SEC_EMAIL=${SEC_EMAIL}
 # -------------------------------------------------------
   # 2. The Face (Frontend)
   # -------------------------------------------------------
