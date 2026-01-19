@@ -9,8 +9,11 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY frontend/package.json ./
 
+# TEST: Can the container actually see the npm registry?
+RUN curl -I https://registry.npmjs.org/
+
 # Install dependencies
-RUN npm install
+RUN npm install --loglevel verbose
 
 # Copy the rest of the frontend code
 COPY frontend/ .
