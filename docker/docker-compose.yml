@@ -6,7 +6,7 @@ services:
     container_name: valuecell-backend     
     volumes:
       - /volume1/docker/valuecell:/app/data
-      #- /volume1/docker/valuecell/configs:/app/configs
+      - /volume1/docker/valuecell/configs:/app/configs
     ports:
       - "8080:8000"            # Fixed Port: Host 8080 -> Container 8000
     # ADD THESE TWO LINES:
