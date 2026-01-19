@@ -20,6 +20,7 @@ services:
       - SEC_EMAIL=${SEC_EMAIL}
       - DATA_DIR=/app/data
       - CONFIG_DIR=/app/configs
+      - VALUECELL_DATA_DIR=/app/data
 # -------------------------------------------------------
   # 2. The Face (Frontend)
   # -------------------------------------------------------
