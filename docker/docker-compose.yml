@@ -13,9 +13,9 @@ services:
     tty: true        # Allocates a pseudo-TTY (pretends a terminal is attached)
     stdin_open: true # Keeps standard input open (prevents EOF signal)
     environment:
-      - API_HOST=0.0.0.0
-      - SEC_EMAIL=your.actual.email@gmail.com  # <--- REQUIRED
-      - GOOGLE_API_KEY=AIzaSy...                 # <--- REQUIRED (Gemini Key)\
+      - API_HOST=${API_HOST}
+      - SEC_EMAIL=${SEC_EMAIL}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
 # -------------------------------------------------------
   # 2. The Face (Frontend)
   # -------------------------------------------------------
@@ -28,6 +28,6 @@ services:
       - "3000:1420"  # Access UI at http://<NAS_IP>:3000
     environment:
       # Points the UI to your Backend API
-      - VITE_API_BASE_URL=http://192.168.1.XX:8080/api/v1  # <--- UPDATE IP
+      - VITE_API_BASE_URL=http://192.168.5.36:8080/api/v1  # <--- UPDATE IP
     depends_on:
       - valuecell
